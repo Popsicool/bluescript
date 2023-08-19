@@ -1,0 +1,21 @@
+{% extends "./base.html" %}
+{% block title %}
+Home
+{% endblock %}
+
+{% block main %}
+
+<div>
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Manage Your Task.</h1>
+            <p>Have fun creating, managing and monitoring your tasks</p>
+            {% if user.is_authenticated %}
+            <a href="{% url 'dashboard' %}"><button class="btn btn-primary">My Dashboard</button></a>
+            {% else %}
+            <a href="{% url 'signup' %}"><button class="btn btn-primary">Get Started</button></a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "./base.html" %}
+{% block title %}
+Create task
+{% endblock %}
+
+{% block main %}
+<div>
+    <form method="post">
+    {% csrf_token  %}
+    <p class="tTt">Create new Task</p>
+    <label>Title</label><br>
+    <input name="title" required><br>
+    <label>Discription</label><br>
+    <textarea cols="50" rows="10" name="description" required></textarea><br>
+    <label>Due date</label><br>
+    <input name="due_date" type="date" required > <br>
+    <input name="due_time" type="time" required > <br>
+    <div class="PG">
+        <div>
+            <label>Priority</label> <br>
+            <select name="priority" required>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+            </select><br>
+        </div>
+        <div>
+            <label>Category</label><br>
+            <select name="category" required>
+                {% for cat in categories %}
+                <option value="{{cat.name}}">{{cat.name}}</option>
+                {% endfor %}
+            </select><br>
+        </div>
+    </div>
+    <button class="btn btn-primary sUp">Create</button>
+    </form>
+</div>
+{% endblock %}

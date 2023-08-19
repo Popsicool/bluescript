@@ -1,0 +1,14 @@
+{% extends "./base.html" %}
+{% block title %}
+Error
+{% endblock %}
+
+
+{% block main %}
+<div class="hero-content">
+    <p>Someting went wrong!!</p>
+    <a href="{% url 'index' %}">
+        <button class="btn btn-primary">Go Home</button>
+    </a>
+</div>
+{% endblock %}

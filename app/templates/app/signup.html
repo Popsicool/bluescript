@@ -1,0 +1,32 @@
+{% extends "./base.html" %}
+{% load static %}
+{% block title %}
+Sign Up
+{% endblock %}
+
+{% block main %}
+<div class="row">
+    <div class="col-md-6 signupImgCont">
+        <img class="signupImg" src="{% static 'img/signup.jpg' %}">
+    </div>
+    <div class="col-md-6 signupRight">
+        <div class="snR">
+            <h3>Get Started</h3>
+            <form method="post">
+                {% csrf_token %}
+                <label>Username</label><br>
+                <input type="text" name="username"><br>
+                <lebel>Email</lebel><br>
+                <input type="email"  name="email"><br>
+                <label>Password</label><br>
+                <input type="password" name="password"><br>
+                <label>Confirm password</label><br>
+                <input type="password" name="password2"><br><br>
+                <button class="btn btn-primary sUp">Sign up</button>
+            </form>
+            <p class="already">Already have an account?     <a href="{% url 'login' %}">Log in</a></p>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

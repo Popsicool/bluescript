@@ -1,0 +1,40 @@
+{% extends "./base.html" %}
+{% block title %}
+Edit task
+{% endblock %}
+
+{% block main %}
+<div >
+    <form method="post">
+    {% csrf_token  %}
+    <p class="tTt">Edit Task</p>
+    <label>Title</label><br>
+    <input name="title" value="{{task.title}}"" required><br>
+    <label>Discription</label><br>
+    <textarea cols="50" rows="10" name="description" required>{{task.description}}</textarea><br>
+    <label>Due date</label><br>
+    <input name="due_date" type="date" value={{task.due_date}} required> <br>
+    <label>Time date</label><br>
+    <input name="due_time" type="time" value={{task.due_time}} required> <br>
+    <div class="PG">
+        <div>
+            <label>Priority</label> <br>
+            <select name="priority" value="{{task.priority}}" required>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+            </select><br>
+        </div>
+        <div>
+            <label>Category</label><br>
+            <select name="category" required>
+                {% for cat in categories %}
+                <option value="{{cat.name}}">{{cat.name}}</option>
+                {% endfor %}
+            </select><br>
+        </div>
+    </div>
+    <button class="btn btn-primary sUp">Edit</button>
+    </form>
+</div>
+{% endblock %}

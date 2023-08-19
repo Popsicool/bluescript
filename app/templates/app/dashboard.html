@@ -1,0 +1,130 @@
+{% extends "./base.html" %}
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block main %}
+<div>
+    <p class="tTt">Welcome {{user.username}}</p>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <div class="chartArea">
+        <canvas class="cartCv" id="myChart" style="width:100%;max-width:600px"></canvas>
+    </div>
+    <div>
+        <form method="get">
+            <p>Filter</p>
+            <p>Status</p>
+            <label>Active</label>
+            <input type="checkbox" name="active" class="fT"><br>
+            <label>Completed</label><br>
+            <input type="checkbox" name="completed" class="fT"><br>
+            <label>Expired</label><br>
+            <input type="checkbox" name="expired" class="fT"><br>
+            <button class="btn btn-primary">Apply</button>
+        </form>
+
+    </div>
+
+    <div>
+        {% if tasks %}
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive table-vertical">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <td>
+                                    Title
+                                </td>
+                                <td>
+                                    Created at
+                                </td>
+                                <td>
+                                    Due date
+                                </td>
+                                <td>
+                                    Due Time
+                                </td>
+                                <td>
+                                    Status
+                                </td>
+                                <td>
+                                    Priority
+                                </td>
+                                <td>
+                                    Category
+                                </td>
+                                <td>
+                                    Completed?
+                                </td>
+                                <td>
+                                    Edit
+                                </td>
+                                <td>
+                                    Delete
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for task in tasks %}
+                            <tr>
+                                <td>{{task.title}}</td>
+                                <td>{{task.date_created}}</td>
+                                <td>{{task.due_date}}</td>
+                                <td>{{task.due_time}}</td>
+                                <td>{{task.status}}</td>
+                                <td>{{task.priority}}</td>
+                                <td>{{task.category.name}}</td>
+                                {% if task.status == 'active' %}
+                                    <td><a href="{% url 'completed' task.id %}"><i class="fas fa-square unchecked-icon" style="background-color: green; color:#fff; cursor: pointer;"></i></a></td>
+                                {% elif task.status == 'completed' %}
+                                    <td><i class="far fa-check-square"></i></td>
+                                {% else %}
+                                <td><i class="fa fa-solid fa-window-close"></i></td>
+                                {% endif %}
+                                <td><a href="{% url 'edit' task.id %}" ><i class="fas fa-edit"></i></a></td>
+                                <td><a href="{% url 'delete' task.id %}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <p>No tasks yet, <a href="{% url 'create' %}">Create one now</a></p>
+        {% endif %}
+    </div>
+    <div style="display: none;">
+        <p id="aT">{{active}}</p>
+        <p id="cT">{{completed}}</p>
+        <p id="eT">{{expired}}</p>
+    </div>
+</div>
+    <script>
+    var aT = document.getElementById("aT").textContent
+    var cT = document.getElementById("cT").textContent
+    var eT = document.getElementById("eT").textContent
+    var xValues = ["Active", "Completed", "Expired"];
+    var yValues = [aT, cT, eT];
+    var barColors = ["blue", "green","red"];
+
+    new Chart("myChart", {
+    type: "bar",
+    data: {
+        labels: xValues,
+        datasets: [{
+        backgroundColor: barColors,
+        data: yValues
+        }]
+    },
+    options: {
+        legend: {display: false},
+        title: {
+        display: true,
+        text: `Task Summary: Total tasks = ${parseInt(aT) + parseInt(cT) + parseInt(eT)}`
+        }
+    }
+    });
+    </script>
+{% endblock %}
