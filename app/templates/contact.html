@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+<iframe title="location" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=House%206,%20Onile%20aro%20Goshen%20Estate,%20Ajibode,%20U.I%20Ibadan.+(FOG%20Agricultural%20services)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" class="map" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+<form action="" method="post">
+    {% csrf_token %}
+    <label for="">Name</label><br>
+    <input type="text" name="name"><br>
+    <label for="">Email</label><br>
+    <input type="email" name="email" id=""><br>
+    <label for="">Message</label><br>
+    <textarea name="message" id=""></textarea>
+    <button>Submit</button>
+</form>
+
+{% endblock main %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %} Login page {% endblock title %}
+
+
+
+{% block main %}
+
+<form action="" method="post">
+    {% csrf_token %}
+    <label for="">Username</label><br>
+    <input type="text" name="username" required><br>
+    <label for="password">Password</label><br>
+    <input type="password" name="password"><br>
+    <button>Login</button>
+</form>
+
+<p>Don't you have an account? Click <a href="{% url 'signup' %}">Here</a> to signup</p>
+
+
+{% endblock main %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %} Signup page {% endblock title %}
+
+
+
+{% block main %}
+
+<form action="" method="post">
+    {% csrf_token %}
+    <label for="">Username</label><br>
+    <input type="text" name="username" required><br>
+    <label for="">Email</label><br>
+    <input type="email" name="email"><br>
+    <label for="">First Name</label><br>
+    <input type="text" name="first_name"><br>
+    <label for="">Last Name</label><br>
+    <input type="text" name="last_name"><br>
+    <label for="password">Password</label><br>
+    <input type="password" name="password"><br>
+    <label for="cpassword">Confirm Password</label><br>
+    <input type="password" name="cpassword"><br>
+    <button>Sign up</button>
+</form>
+
+<p>Do you have an account? Click <a href="{% url 'login' %}">Here</a> to login</p>
+
+
+{% endblock main %}

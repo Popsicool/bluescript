@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+
+
+
+{% block title %}Home page{% endblock title %}
+
+{% block head %}
+<style>
+    .product-card{
+        width: 200px;
+        height: 500px;
+        border: 1px solid red;
+        padding: 1%;
+    }
+    .image-wrap{
+        width: 100%;
+        height: 50%;
+    }
+    .image-wrap img{
+        width: 100%;
+        height: 50%;
+    }
+    .all-product{
+        display: flex;
+    }
+</style>
+
+{% endblock head %}
+{% block main %}
+<div>
+    <h3>My Products</h3>
+    <div class="all-product">
+
+    
+    {% for product in my_products %}
+        <div class="product-card">
+            <div class="image-wrap">
+                <img src="{{ product.image.url }}" alt="product image">
+            </div>
+            <p>{{ product.name }}</p>
+            <p>{{ product.quantity }} Quantity left</p>
+            <p>N{{ product.price }} each</p>
+            <a href="{% url 'edit_product' product.id %}"><button>Edit</button></a>
+            <a href="{% url 'delete_product' product.id %}"><button>Delete</button></a>
+            
+
+        </div>
+
+    {% endfor %}
+</div>
+</div>
+<div>
+    <h3>Market place</h3>
+    <div class="all-product">
+
+    
+    {% for product in market_place %}
+        <div class="product-card">
+            <div class="image-wrap">
+                <img src="{{ product.image.url }}" alt="product image">
+            </div>
+            <p>{{ product.name }}</p>
+            <p>{{ product.quantity }} Quantity left</p>
+            <p>N{{ product.price }} each</p>
+            
+            {% if product.is_available %}
+                <a href="{% url 'shop_product' product.id %}"><button>Buy now</button></a>
+            {% else %}
+            <p>Sold out</p>
+
+            {% endif %}
+        </div>
+
+    {% endfor %}
+</div>
+</div>
+
+
+{% endblock main %}
